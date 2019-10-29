@@ -1,0 +1,33 @@
+:root{
+    --main-color: #527A60;
+    --main-color-dark: #252625;
+    --second-color: #6FA682;
+}
+
+.text-lowercase{
+    text-transform: lowercase;
+}
+
+.social-icons a:hover {
+    background-color: var(--main-color);
+}
+
+.dev-icons .list-inline-item i:hover {
+    color: var(--main-color);
+}
+
+.bg-primary {
+    background-color: var(--main-color) !important;
+  }
+  
+.text-primary {
+    color: var(--main-color) !important;
+}
+  
+a {
+    color: var(--main-color);
+}
+
+a:hover, a:focus, a:active {
+    color: var(--main-color-dark);
+}
