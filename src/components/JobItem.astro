@@ -1,0 +1,53 @@
+---
+import type { Job } from "../data/cv";
+
+interface Props {
+  job: Job;
+}
+
+const { job } = Astro.props;
+---
+
+{/* El hilo de la línea de tiempo es el borde izquierdo; el último ítem lo apaga. */}
+<article
+  class="relative border-l border-line pb-10 pl-7 last:border-transparent last:pb-0"
+>
+  <span
+    class="absolute top-1.5 -left-[5.5px] h-2.5 w-2.5 rounded-full bg-brand ring-4 ring-paper"
+    aria-hidden="true"></span>
+
+  <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+    <h3 class="text-lg text-ink">{job.role}</h3>
+    <span class="text-ink-soft/50">·</span>
+    {
+      job.url ? (
+        <a
+          href={job.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-medium text-brand underline-offset-4 hover:underline"
+        >
+          {job.company}
+        </a>
+      ) : (
+        <span class="font-medium text-brand">{job.company}</span>
+      )
+    }
+  </div>
+
+  <p class="mt-1.5 font-mono text-xs tracking-wide text-ink-soft/75">
+    {job.period}
+    {job.note && <span class="ml-2 text-brand/75">({job.note})</span>}
+  </p>
+
+  <ul class="mt-4 space-y-2">
+    {
+      job.bullets.map((b) => (
+        <li class="relative pl-4 text-[15px] leading-relaxed text-ink-soft">
+          <span class="absolute top-2.5 left-0 h-1 w-1 rounded-full bg-brand-light" />
+          {b}
+        </li>
+      ))
+    }
+  </ul>
+</article>

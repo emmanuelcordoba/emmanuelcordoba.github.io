@@ -1,0 +1,178 @@
+---
+import Base from "../layouts/Base.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Section from "../components/Section.astro";
+import JobItem from "../components/JobItem.astro";
+import {
+  education,
+  experience,
+  languages,
+  links,
+  metrics,
+  profile,
+  skills,
+  teaching,
+  venture,
+} from "../data/cv";
+---
+
+<Base>
+  <Sidebar />
+
+  <main class="lg:pl-72">
+    <div class="mx-auto max-w-3xl px-6 sm:px-10">
+      <Section id="perfil" title="Perfil" lead>
+        <h1 class="sr-only">{profile.name} — {profile.role}</h1>
+
+        <p class="text-xl leading-relaxed text-ink sm:text-2xl">
+          {profile.summary}
+        </p>
+        <p class="mt-5 leading-relaxed text-ink-soft">
+          {profile.summarySecondary}
+        </p>
+
+        <p class="mt-6 text-sm text-ink-soft">
+          <span class="font-medium text-ink">{profile.location}</span>
+          <span class="mx-2 text-line">|</span>
+          {profile.availability}
+        </p>
+
+        <dl class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-line py-8">
+          {
+            metrics.map((m) => (
+              <div>
+                <dt class="font-display text-2xl font-bold text-brand sm:text-3xl">
+                  {m.value}
+                  {m.unit && <span class="ml-1 text-lg">{m.unit}</span>}
+                </dt>
+                <dd class="mt-1.5 text-sm leading-snug text-ink-soft">
+                  {m.label}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <a
+          href={venture.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group mt-10 block rounded-xl border border-brand/25 bg-brand-soft p-6 transition-colors hover:border-brand/50"
+        >
+          <p class="font-mono text-xs tracking-wide text-brand">
+            {venture.period}
+          </p>
+          <p class="mt-2 font-display text-lg font-bold text-ink">
+            {venture.role} de {venture.name}
+            <span
+              class="ml-1 inline-block text-brand transition-transform group-hover:translate-x-1"
+              >→</span
+            >
+          </p>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">
+            {venture.description}
+          </p>
+        </a>
+      </Section>
+
+      <Section id="experiencia" title="Experiencia">
+        {experience.map((job) => <JobItem job={job} />)}
+      </Section>
+
+      <Section id="docencia" title="Docencia y mentoría">
+        {teaching.map((job) => <JobItem job={job} />)}
+      </Section>
+
+      <Section id="educacion" title="Educación">
+        <div class="space-y-7">
+          {
+            education.map((e) => (
+              <div>
+                <h3 class="text-lg text-ink">{e.title}</h3>
+                <p class="mt-1 font-medium text-brand">{e.school}</p>
+                <p class="mt-1 font-mono text-xs tracking-wide text-ink-soft/75">
+                  {e.detail}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </Section>
+
+      <Section id="habilidades" title="Habilidades técnicas">
+        <div class="space-y-6">
+          {
+            skills.map((g) => (
+              <div class="sm:grid sm:grid-cols-[180px_1fr] sm:items-baseline sm:gap-6">
+                <h3 class="font-display text-sm font-semibold tracking-wide text-ink uppercase">
+                  {g.group}
+                </h3>
+                <ul class="mt-2 flex flex-wrap gap-2 sm:mt-0">
+                  {g.items.map((item) => (
+                    <li class="rounded-md border border-line bg-white px-2.5 py-1 font-mono text-xs text-ink-soft">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+
+          <div class="sm:grid sm:grid-cols-[180px_1fr] sm:items-baseline sm:gap-6">
+            <h3 class="font-display text-sm font-semibold tracking-wide text-ink uppercase">
+              Idiomas
+            </h3>
+            <ul class="mt-2 space-y-1 sm:mt-0">
+              {
+                languages.map((l) => (
+                  <li class="text-[15px] text-ink-soft">
+                    <span class="font-medium text-ink">{l.name}</span> — {l.level}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="contacto" title="Contacto">
+        <p class="text-lg leading-relaxed text-ink-soft">
+          Si tenés un proyecto o una posición que encaje con lo que hago,
+          escribime y lo charlamos.
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a
+            href={`mailto:${profile.email}`}
+            class="rounded-lg bg-brand px-5 py-3 font-display text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+          >
+            {profile.email}
+          </a>
+          <a
+            href={links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-line bg-white px-5 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-line bg-white px-5 py-3 font-display text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
+          >
+            GitHub
+          </a>
+        </div>
+      </Section>
+
+      <footer
+        class="flex flex-col gap-2 border-t border-line py-8 text-sm text-ink-soft/80 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p>© 2026 {profile.name}</p>
+        <a href="/privacypolicy/" class="hover:text-brand">Política de privacidad</a>
+      </footer>
+    </div>
+  </main>
+</Base>

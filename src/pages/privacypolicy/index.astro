@@ -1,0 +1,23 @@
+---
+import Base from "../../layouts/Base.astro";
+import { profile } from "../../data/cv";
+// Texto legal migrado tal cual del sitio anterior: se inyecta crudo para no
+// alterar una sola palabra de lo que ya estaba publicado.
+import policy from "../../content/privacy-policy.html?raw";
+---
+
+<Base
+  title={`Política de privacidad — ${profile.name}`}
+  description="Política de privacidad del sitio emmanuelcordoba.com."
+>
+  <main class="mx-auto max-w-2xl px-6 py-16 sm:px-10">
+    <a
+      href="/"
+      class="font-mono text-sm text-brand underline-offset-4 hover:underline"
+    >
+      ← Volver al inicio
+    </a>
+
+    <div class="legal mt-10" lang="en" set:html={policy} />
+  </main>
+</Base>

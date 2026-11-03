@@ -1,0 +1,25 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  /** Primera sección: sin borde superior ni margen extra. */
+  lead?: boolean;
+}
+
+const { id, title, lead = false } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    "scroll-mt-24 py-14 sm:py-16",
+    !lead && "border-t border-line",
+  ]}
+>
+  <h2 class="text-2xl text-ink sm:text-3xl">
+    <span class="text-brand">{"// "}</span>{title}
+  </h2>
+  <div class="mt-8">
+    <slot />
+  </div>
+</section>

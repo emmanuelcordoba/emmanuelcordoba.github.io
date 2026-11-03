@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colores base heredados del sitio anterior (css/style.css). */
+  --color-brand: #527a60;
+  --color-brand-light: #6fa682;
+  --color-brand-dark: #3f5e4a;
+  --color-brand-soft: #eef3ef;
+  --color-ink: #252625;
+  --color-ink-soft: #4a4f4b;
+  --color-paper: #fbfcfb;
+  --color-line: #e4e9e5;
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Texto legal de la política de privacidad, inyectado como HTML crudo. */
+.legal h1 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.legal h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal p,
+.legal li {
+  color: var(--color-ink-soft);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.legal ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.legal a {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
